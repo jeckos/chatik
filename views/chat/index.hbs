@@ -24,27 +24,6 @@
     scroll.scrollTop = scroll.scrollHeight;
     var div = $('#list-messages');
 
-//    $('.btn').on('click', function(){
-//        div.animate({
-//            scrollTop: div.get(0).scrollHeight
-//        });
-//    });
-
-//
-//    var textarea = document.querySelector('textarea');
-//
-//    textarea.addEventListener('keydown', autosize);
-//
-//    function autosize(){
-//        var el = this;
-//        setTimeout(function(){
-//            el.style.cssText = 'height:auto; padding:0';
-//            // for box-sizing other than "content-box" use:
-//            el.style.cssText = '-moz-box-sizing:content-box';
-//            el.style.cssText = 'height:' + el.scrollHeight + 'px';
-//        },0);
-//    }
-
 
 </script>
 
@@ -78,13 +57,6 @@
                 socket.on('load user', function (docs, username) {
                     console.log(username)
 
-                    //for(var i = 0; i< docs.length; i++){
-                        //    $('<li><a href="#">'+docs[i]+'</a></li>').appendTo(ul);
-//console.log(docs[i])
-//                            if(username == docs[i]){
-//                                $('.users-ul li a').addClass('online');
-//                            }
-                   // }
 
                 });
 

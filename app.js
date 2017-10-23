@@ -40,11 +40,15 @@ app.use(cookieParser());
 var sessionStore = require('./lib/sessionStore');
 
 app.use(session({
-    secret: config.get('session:secret'),
-    key: config.get('session:key'),
+    secret:'mysupersecret',
+    key: 'sid',
     resave:true,
     saveUninitialized: true,
-    cookie: config.get('session:cookie'),
+    cookie:{
+        path: "/",
+        httpOnly: true,
+        maxAge: 180 * 60 * 1000
+    },
     store: sessionStore
 }));
 
