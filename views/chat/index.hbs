@@ -1,0 +1,100 @@
+<div class="message-container">
+                <div class="msg-cont-header">
+                    <p>{{username}}</p>
+                </div>
+                <div id="list-messages" class="list-messages" onload="this.scrollTop = 9999;">
+                </div>
+                <div class="send-container">
+                    <form action="" method="post">
+                        <input type="text" autocomplete="off" id="textmessage" placeholder='Ваше сообщение...'>
+                        <button type="submit" class="btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
+
+<script>
+
+    var scroll = document.getElementById('list-messages');
+    scroll.scrollTop = scroll.scrollHeight;
+    var div = $('#list-messages');
+
+
+
+</script>
+
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+                $( document ).ready(function(){
+
+                var socket = io();
+
+
+                var form = $('.send-container form');
+                var div = $('.list-messages');
+                var ul = $('.users-ul');
+
+                form.submit(function () {
+                    var input = $(this).find(':input');
+                    var text = input.val();
+                    input.val('');
+
+                    socket.emit('message', text, function (data) {
+                        var mess= $('<div class="user-message-my">').appendTo(div);
+                        $('<h2>{{username}}</h2>').appendTo(mess);
+                        $('<p>', {text:text}).appendTo(mess);
+                        div.animate({
+                            scrollTop: div.get(0).scrollHeight
+                        });
+                    });
+                    return false
+                });
+
+                socket.on('load old message', function (docs, username) {
+                    for(var i = 0; i< docs.length; i++){
+                         displayMessage(docs[i], username);
+                    }
+                });
+
+
+                function displayMessage(data, username) {
+                    if(data.userId == username){
+                        var mess= $('<div class="user-message-my">').appendTo(div);
+                        $('<h2>'+ data.userId +'</h2>').appendTo(mess);
+                        $('<p>'+ data.msg+'</p>').appendTo(mess);
+                        div.animate({
+                            scrollTop: div.get(0).scrollHeight
+                        });
+                    }else {
+                        var mess= $('<div class="user-message">').appendTo(div);
+                        $('<h2>'+ data.userId +'</h2>').appendTo(mess);
+                        $('<p>'+ data.msg+'</p>').appendTo(mess);
+                        div.animate({
+                            scrollTop: div.get(0).scrollHeight
+                        });
+                    }
+
+                }
+
+
+                socket.on('message',  function (username,text) {
+                   var mess= $('<div class="user-message">').appendTo(div);
+                   $('<h2>'+ username+'</h2>').appendTo(mess);
+                   $('<p>', {text:text}).appendTo(mess);
+                    div.animate({
+                        scrollTop: div.get(0).scrollHeight
+                    });
+                })
+                        .on('disconnect', function() {
+                            printStatus("соединение потеряно");
+                            input.prop('disabled', true);
+                            this.$emit('error');
+                        })
+
+                function printStatus(status) {
+                    var mess= $('<div class="user-message">').appendTo(div);
+                    $('<p>').append().text(status).appendTo(mess);
+                     }
+
+                });
+
+            </script>

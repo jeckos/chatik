@@ -1,0 +1,8 @@
+<div class="user-setting">
+    <form name="changename-form" action="/setting" method="post">
+        <label for="changename">Изменить имя <span>{{username}}</span></label>
+        <input type="text" id="changename" name="changename">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type="submit" class="btn">Сохранить изменения</button>
+    </form>
+</div>

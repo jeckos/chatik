@@ -1,0 +1,13 @@
+{
+  "session": {
+    "secret": "mysupersecret",
+    "key": "sid",
+    "resave": false,
+    "saveUninitialized": false,
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": "180 * 60 * 1000"
+    }
+  }
+}

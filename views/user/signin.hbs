@@ -1,0 +1,18 @@
+            <div class="login-page">
+                <div class="form">
+                    {{# if hasErrors}}
+                        <div class="alert alert-danger">
+                            {{# each messages}}
+                                <p>{{this}}</p>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    <form class="login-form" action="/user/signin" method="post">
+                        <input type="text" placeholder="Email" name="email"/>
+                        <input type="password" placeholder="Пароль" name="password"/>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button type="submit">Войти</button>
+                        <p class="message">Вы еще не зарегистрированы? <a href="/user/signup">Зарегистрироваться сейчас</a></p>
+                    </form>
+                </div>
+            </div>

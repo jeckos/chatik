@@ -1,0 +1,17 @@
+
+<div class="bg">
+    <header>
+        <div class="container">
+            <div class="logo"><a href="/">CHATIK</a></div>
+    {{# if login }}
+              <nav class="pull-right">
+                <ul class="setting">
+                    <li><a href="/setting"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
+                    <li><a href="/user/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                </ul>
+            </nav>
+    {{ else }}
+    {{/if}}
+        </div>
+    </header>
+</div>
