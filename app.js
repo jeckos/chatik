@@ -40,11 +40,11 @@ app.use(cookieParser());
 var sessionStore = require('./lib/sessionStore');
 
 app.use(session({
-    secret:'session:secret',
-    key: "session:key",
-    resave:"session:resave",
-    saveUninitialized: "session:saveUninitialized",
-    cookie:'session:cookie',
+    secret: config.get('session:secret'),
+    key: config.get('session:key'),
+    resave:true,
+    saveUninitialized: true,
+    cookie: config.get('session:cookie'),
     store: sessionStore
 }));
 

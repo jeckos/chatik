@@ -1,3 +1,8 @@
+
+<div class="users">
+    <ul class="users-ul">
+    </ul>
+</div>
 <div class="message-container">
                 <div class="msg-cont-header">
                     <p>{{username}}</p>
@@ -6,8 +11,9 @@
                 </div>
                 <div class="send-container">
                     <form action="" method="post">
-                        <input type="text" autocomplete="off" id="textmessage" placeholder='Ваше сообщение...'>
-                        <button type="submit" class="btn">Отправить</button>
+                        <input type="text" autocomplete="off" id="textmessage" placeholder='Start typing your message...'>
+                        <!--<textarea name="messege" id="textmessage" rows='1' placeholder='Start typing your message...'></textarea>-->
+                        <button type="submit" class="btn">send</button>
                     </form>
                 </div>
             </div>
@@ -18,6 +24,26 @@
     scroll.scrollTop = scroll.scrollHeight;
     var div = $('#list-messages');
 
+//    $('.btn').on('click', function(){
+//        div.animate({
+//            scrollTop: div.get(0).scrollHeight
+//        });
+//    });
+
+//
+//    var textarea = document.querySelector('textarea');
+//
+//    textarea.addEventListener('keydown', autosize);
+//
+//    function autosize(){
+//        var el = this;
+//        setTimeout(function(){
+//            el.style.cssText = 'height:auto; padding:0';
+//            // for box-sizing other than "content-box" use:
+//            el.style.cssText = '-moz-box-sizing:content-box';
+//            el.style.cssText = 'height:' + el.scrollHeight + 'px';
+//        },0);
+//    }
 
 
 </script>
@@ -48,6 +74,22 @@
                     });
                     return false
                 });
+
+                socket.on('load user', function (docs, username) {
+                    console.log(username)
+
+                    //for(var i = 0; i< docs.length; i++){
+                        //    $('<li><a href="#">'+docs[i]+'</a></li>').appendTo(ul);
+//console.log(docs[i])
+//                            if(username == docs[i]){
+//                                $('.users-ul li a').addClass('online');
+//                            }
+                   // }
+
+                });
+
+
+
 
                 socket.on('load old message', function (docs, username) {
                     for(var i = 0; i< docs.length; i++){
@@ -84,6 +126,8 @@
                         scrollTop: div.get(0).scrollHeight
                     });
                 })
+
+
                         .on('disconnect', function() {
                             printStatus("соединение потеряно");
                             input.prop('disabled', true);
@@ -93,6 +137,7 @@
                 function printStatus(status) {
                     var mess= $('<div class="user-message">').appendTo(div);
                     $('<p>').append().text(status).appendTo(mess);
+console.log(status);
                      }
 
                 });
