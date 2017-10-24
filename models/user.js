@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
     username:{
-        type:String,
+        type:String
     },
     email:{
         type:String,

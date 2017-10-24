@@ -11,9 +11,8 @@
                 </div>
                 <div class="send-container">
                     <form action="" method="post">
-                        <input type="text" autocomplete="off" id="textmessage" placeholder='Start typing your message...'>
-                        <!--<textarea name="messege" id="textmessage" rows='1' placeholder='Start typing your message...'></textarea>-->
-                        <button type="submit" class="btn">send</button>
+                        <input type="text" autocomplete="off" id="textmessage" placeholder='Ваше сообщение...'>
+                        <button type="submit" class="btn">Отправить</button>
                     </form>
                 </div>
             </div>
@@ -63,24 +62,24 @@
 
 
 
-                socket.on('load old message', function (docs, username) {
+                socket.on('load old message', function (docs, username, userid) {
                     for(var i = 0; i< docs.length; i++){
-                         displayMessage(docs[i], username);
+                         displayMessage(docs[i], username, userid);
                     }
                 });
 
 
-                function displayMessage(data, username) {
-                    if(data.userId == username){
+                function displayMessage(data, username, userid) {
+                    if(data.userId == userid){
                         var mess= $('<div class="user-message-my">').appendTo(div);
-                        $('<h2>'+ data.userId +'</h2>').appendTo(mess);
+                        $('<h2>'+ data.userName +'</h2>').appendTo(mess);
                         $('<p>'+ data.msg+'</p>').appendTo(mess);
                         div.animate({
                             scrollTop: div.get(0).scrollHeight
                         });
                     }else {
                         var mess= $('<div class="user-message">').appendTo(div);
-                        $('<h2>'+ data.userId +'</h2>').appendTo(mess);
+                        $('<h2>'+ data.userName +'</h2>').appendTo(mess);
                         $('<p>'+ data.msg+'</p>').appendTo(mess);
                         div.animate({
                             scrollTop: div.get(0).scrollHeight
